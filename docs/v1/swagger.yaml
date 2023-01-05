@@ -33,30 +33,30 @@ paths:
                 Successfully received list of to_do_items:
                   value:
                   - id: 1
-                    title: Ace DASL (Distributed Application Specification Language)
+                    title: Zeno
                     status: active
-                    created_at: '2023-01-05T09:33:14.201Z'
-                    updated_at: '2023-01-05T09:33:14.201Z'
+                    created_at: '2023-01-05T12:05:59.580Z'
+                    updated_at: '2023-01-05T12:05:59.580Z'
                   - id: 2
-                    title: PureBasic
+                    title: MIMIC
                     status: active
-                    created_at: '2023-01-05T09:33:14.202Z'
-                    updated_at: '2023-01-05T09:33:14.202Z'
+                    created_at: '2023-01-05T12:05:59.581Z'
+                    updated_at: '2023-01-05T12:05:59.581Z'
                   - id: 3
-                    title: GraphTalk
+                    title: Yorick
                     status: active
-                    created_at: '2023-01-05T09:33:14.203Z'
-                    updated_at: '2023-01-05T09:33:14.203Z'
+                    created_at: '2023-01-05T12:05:59.582Z'
+                    updated_at: '2023-01-05T12:05:59.582Z'
                   - id: 4
-                    title: Onyx
+                    title: FP
                     status: active
-                    created_at: '2023-01-05T09:33:14.203Z'
-                    updated_at: '2023-01-05T09:33:14.203Z'
+                    created_at: '2023-01-05T12:05:59.582Z'
+                    updated_at: '2023-01-05T12:05:59.582Z'
                   - id: 5
-                    title: S2
+                    title: Argus
                     status: active
-                    created_at: '2023-01-05T09:33:14.203Z'
-                    updated_at: '2023-01-05T09:33:14.203Z'
+                    created_at: '2023-01-05T12:05:59.582Z'
+                    updated_at: '2023-01-05T12:05:59.582Z'
               schema:
                 type: array
                 items:
@@ -148,4 +148,4 @@ servers:
 - url: https://{defaultHost}
   variables:
     defaultHost:
-      default: http://localhost:3000
+      default: localhost:3000
