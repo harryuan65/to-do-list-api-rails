@@ -1,10 +1,11 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
-require 'spec_helper'
-ENV['RAILS_ENV'] ||= 'test'
-require_relative '../config/environment'
+require "spec_helper"
+
+ENV["RAILS_ENV"] ||= "test"
+require_relative "../config/environment"
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
-require 'rspec/rails'
+require "rspec/rails"
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -29,6 +30,9 @@ begin
 rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
+
+Dir[Rails.root.join("spec/support/*.rb")].each(&method(:require))
+
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -60,4 +64,17 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+end
+
+#
+# Overwrite to suppress backtrace
+#
+class RSpec::Core::Formatters::ExceptionPresenter
+  def formatted_message_and_backtrace(colorizer)
+    lines = colorized_message_lines(colorizer) + colorized_formatted_backtrace(colorizer).slice(0, 1)
+    encoding = encoding_of("")
+    lines.map do |line|
+      RSpec::Support::EncodedString.new(line, encoding)
+    end
+  end
 end

@@ -1,0 +1,151 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+components:
+  schemas:
+    to_do_item:
+      type: object
+      properties:
+        title:
+          type: string
+        status:
+          type: string
+          enum:
+          - active
+          - done
+      required:
+      - title
+      - status
+paths:
+  "/to_do_items":
+    get:
+      summary: List to_do_items
+      tags:
+      - ToDoItem
+      responses:
+        '200':
+          description: Successfully received list of to_do_items
+          content:
+            application/json:
+              examples:
+                Successfully received list of to_do_items:
+                  value:
+                  - id: 1
+                    title: Ace DASL (Distributed Application Specification Language)
+                    status: active
+                    created_at: '2023-01-05T09:33:14.201Z'
+                    updated_at: '2023-01-05T09:33:14.201Z'
+                  - id: 2
+                    title: PureBasic
+                    status: active
+                    created_at: '2023-01-05T09:33:14.202Z'
+                    updated_at: '2023-01-05T09:33:14.202Z'
+                  - id: 3
+                    title: GraphTalk
+                    status: active
+                    created_at: '2023-01-05T09:33:14.203Z'
+                    updated_at: '2023-01-05T09:33:14.203Z'
+                  - id: 4
+                    title: Onyx
+                    status: active
+                    created_at: '2023-01-05T09:33:14.203Z'
+                    updated_at: '2023-01-05T09:33:14.203Z'
+                  - id: 5
+                    title: S2
+                    status: active
+                    created_at: '2023-01-05T09:33:14.203Z'
+                    updated_at: '2023-01-05T09:33:14.203Z'
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/to_do_item"
+    post:
+      summary: Create to_do_item
+      tags:
+      - ToDoItem
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: to_do_item id
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: Successfully created to_do_item
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                Bad Request:
+                  value:
+                    message: "'pending' is not a valid status"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/to_do_item"
+        required: true
+        description: to_do_item fields
+  "/to_do_items/{id}":
+    patch:
+      summary: Update to_do_item
+      tags:
+      - ToDoItem
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: to_do_item id
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: Update success
+        '404':
+          description: Not found
+          content:
+            application/json:
+              examples:
+                Not found:
+                  value:
+                    error:
+                      message: Couldn't find ToDoItem with 'id'=1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/to_do_item"
+        required: true
+        description: to_do_item fields
+    delete:
+      summary: Delete to_do_item
+      tags:
+      - ToDoItem
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: to_do_item id
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: Delete success
+        '404':
+          description: Not found
+          content:
+            application/json:
+              examples:
+                Not found:
+                  value:
+                    error:
+                      message: Couldn't find ToDoItem with 'id'=1
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: http://localhost:3000
