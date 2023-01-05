@@ -38,7 +38,6 @@ RSpec.describe "to_do_items", type: :request, swagger: true do
       produces "application/json"
       consumes "application/json"
 
-      parameter name: :id, in: :path, type: :integer, required: true, description: "to_do_item id"
       parameter name: :payload, in: :body, required: true, description: "to_do_item fields",
         schema: {"$ref" => "#/components/schemas/to_do_item"}
 
