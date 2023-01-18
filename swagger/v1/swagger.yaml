@@ -29,34 +29,6 @@ paths:
           description: Successfully received list of to_do_items
           content:
             application/json:
-              examples:
-                Successfully received list of to_do_items:
-                  value:
-                  - id: 1
-                    title: es
-                    status: active
-                    created_at: '2023-01-05T13:47:29.062Z'
-                    updated_at: '2023-01-05T13:47:29.062Z'
-                  - id: 2
-                    title: Rapira
-                    status: active
-                    created_at: '2023-01-05T13:47:29.063Z'
-                    updated_at: '2023-01-05T13:47:29.063Z'
-                  - id: 3
-                    title: TUTOR
-                    status: active
-                    created_at: '2023-01-05T13:47:29.063Z'
-                    updated_at: '2023-01-05T13:47:29.063Z'
-                  - id: 4
-                    title: Component Pascal
-                    status: active
-                    created_at: '2023-01-05T13:47:29.064Z'
-                    updated_at: '2023-01-05T13:47:29.064Z'
-                  - id: 5
-                    title: Newspeak
-                    status: active
-                    created_at: '2023-01-05T13:47:29.064Z'
-                    updated_at: '2023-01-05T13:47:29.064Z'
               schema:
                 type: array
                 items:
@@ -67,16 +39,17 @@ paths:
       - ToDoItem
       parameters: []
       responses:
-        '204':
+        '200':
           description: Successfully created to_do_item
-        '400':
-          description: Bad Request
           content:
             application/json:
-              examples:
-                Bad Request:
-                  value:
-                    message: "'pending' is not a valid status"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+        '400':
+          description: Bad Request
       requestBody:
         content:
           application/json:
@@ -101,13 +74,6 @@ paths:
           description: Update success
         '404':
           description: Not found
-          content:
-            application/json:
-              examples:
-                Not found:
-                  value:
-                    error:
-                      message: Couldn't find ToDoItem with 'id'=1
       requestBody:
         content:
           application/json:
@@ -131,13 +97,6 @@ paths:
           description: Delete success
         '404':
           description: Not found
-          content:
-            application/json:
-              examples:
-                Not found:
-                  value:
-                    error:
-                      message: Couldn't find ToDoItem with 'id'=1
 servers:
 - url: https://{defaultHost}
   variables:

@@ -7,8 +7,10 @@ class ToDoItemsController < ApplicationController
   end
 
   def create
-    ToDoItem.create!(to_do_item_params)
-    head :no_content
+    new_item = to_do_item_params
+    new_item.delete(:id)
+    item = ToDoItem.create!(new_item)
+    render json: {id: item.id}
   rescue ArgumentError => exception
     render json: {message: exception.message}, status: :bad_request
   end

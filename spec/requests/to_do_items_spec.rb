@@ -43,9 +43,12 @@ RSpec.describe "to_do_items", type: :request, swagger: true do
 
       let(:to_do_item) { create(:to_do_item) }
 
-      response 204, "Successfully created to_do_item" do
+      response 200, "Successfully created to_do_item" do
         let(:payload) { {title: "New Item!", status: "done"} }
         let(:id) { to_do_item.id }
+        schema type: :object, properties: {
+          id: {type: :integer}
+        }
         run_test!
       end
 
