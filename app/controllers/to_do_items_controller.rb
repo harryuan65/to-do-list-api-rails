@@ -3,7 +3,8 @@
 #
 class ToDoItemsController < ApplicationController
   def index
-    render json: ToDoItem.all
+    to_do_items = ToDoItem.all
+    render json: Panko::ArraySerializer.new(to_do_items, each_serializer: ToDoItemSerializer).to_json
   end
 
   def create

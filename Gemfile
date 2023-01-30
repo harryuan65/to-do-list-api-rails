@@ -37,6 +37,7 @@ gem "bootsnap", require: false
 # gem "rack-cors"
 
 # Gemfile
+gem "panko_serializer"
 gem "rswag-api"
 gem "rswag-ui"
 
