@@ -39,7 +39,7 @@ RSpec.describe "to_do_items", type: :request, swagger: true do
       consumes "application/json"
 
       parameter name: :payload, in: :body, required: true, description: "to_do_item fields",
-        schema: {"$ref" => "#/components/schemas/to_do_item"}
+        schema: {"$ref" => "#/components/schemas/to_do_item_body"}
 
       let(:to_do_item) { create(:to_do_item) }
 
@@ -66,7 +66,7 @@ RSpec.describe "to_do_items", type: :request, swagger: true do
       tags "ToDoItem"
       consumes "application/json"
       parameter name: :id, in: :path, type: :integer, required: true, description: "to_do_item id"
-      parameter name: :payload, in: :body, schema: {"$ref" => "#/components/schemas/to_do_item"}, required: true, description: "to_do_item fields"
+      parameter name: :payload, in: :body, schema: {"$ref" => "#/components/schemas/to_do_item_body"}, required: true, description: "to_do_item fields"
 
       let(:payload) { {title: "Updated title", status: "done"} }
       let(:to_do_item) { create(:to_do_item) }

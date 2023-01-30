@@ -24,6 +24,27 @@ RSpec.configure do |config|
       components: {
         schemas: {
           to_do_item: {
+            description: "An existing to do item properties",
+            type: :object,
+            properties: {
+              id: {
+                type: :integer
+              },
+              title: {
+                type: :string
+              },
+              status: {
+                type: :string,
+                enum: [
+                  "active",
+                  "done"
+                ]
+              }
+            },
+            required: %w[id title status]
+          },
+          to_do_item_body: {
+            description: "Properties for creating a new to do item",
             type: :object,
             properties: {
               title: {
@@ -45,9 +66,10 @@ RSpec.configure do |config|
       servers: [
         {
           url: "https://{defaultHost}",
+          description: "This rails server should be started locally",
           variables: {
             defaultHost: {
-              default: "localhost:3000"
+              default: "localhost:3003"
             }
           }
         }

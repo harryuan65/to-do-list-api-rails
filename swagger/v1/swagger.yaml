@@ -6,6 +6,24 @@ info:
 components:
   schemas:
     to_do_item:
+      description: An existing to do item properties
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        status:
+          type: string
+          enum:
+          - active
+          - done
+      required:
+      - id
+      - title
+      - status
+    to_do_item_body:
+      description: Properties for creating a new to do item
       type: object
       properties:
         title:
@@ -29,6 +47,34 @@ paths:
           description: Successfully received list of to_do_items
           content:
             application/json:
+              examples:
+                Successfully received list of to_do_items:
+                  value:
+                  - id: 1
+                    title: Ada
+                    status: active
+                    created_at: '2023-01-30T06:25:42.030Z'
+                    updated_at: '2023-01-30T06:25:42.030Z'
+                  - id: 2
+                    title: ALF
+                    status: active
+                    created_at: '2023-01-30T06:25:42.032Z'
+                    updated_at: '2023-01-30T06:25:42.032Z'
+                  - id: 3
+                    title: TAL
+                    status: active
+                    created_at: '2023-01-30T06:25:42.032Z'
+                    updated_at: '2023-01-30T06:25:42.032Z'
+                  - id: 4
+                    title: MIIS
+                    status: active
+                    created_at: '2023-01-30T06:25:42.032Z'
+                    updated_at: '2023-01-30T06:25:42.032Z'
+                  - id: 5
+                    title: Hope
+                    status: active
+                    created_at: '2023-01-30T06:25:42.033Z'
+                    updated_at: '2023-01-30T06:25:42.033Z'
               schema:
                 type: array
                 items:
@@ -43,6 +89,10 @@ paths:
           description: Successfully created to_do_item
           content:
             application/json:
+              examples:
+                Successfully created to_do_item:
+                  value:
+                    id: 1
               schema:
                 type: object
                 properties:
@@ -50,11 +100,17 @@ paths:
                     type: integer
         '400':
           description: Bad Request
+          content:
+            application/json:
+              examples:
+                Bad Request:
+                  value:
+                    message: "'pending' is not a valid status"
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/to_do_item"
+              "$ref": "#/components/schemas/to_do_item_body"
         required: true
         description: to_do_item fields
   "/to_do_items/{id}":
@@ -74,11 +130,18 @@ paths:
           description: Update success
         '404':
           description: Not found
+          content:
+            application/json:
+              examples:
+                Not found:
+                  value:
+                    error:
+                      message: Couldn't find ToDoItem with 'id'=1
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/to_do_item"
+              "$ref": "#/components/schemas/to_do_item_body"
         required: true
         description: to_do_item fields
     delete:
@@ -97,8 +160,16 @@ paths:
           description: Delete success
         '404':
           description: Not found
+          content:
+            application/json:
+              examples:
+                Not found:
+                  value:
+                    error:
+                      message: Couldn't find ToDoItem with 'id'=1
 servers:
 - url: https://{defaultHost}
+  description: This rails server should be started locally
   variables:
     defaultHost:
-      default: localhost:3000
+      default: localhost:3003
