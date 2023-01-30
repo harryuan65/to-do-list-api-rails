@@ -1,6 +1,8 @@
 # To-do List Server - Rails
 
-To-do list back-end using Ruby on Rails.
+To-do list back-end using Ruby on Rails API.
+
+[To do lists - Main Repo](https://github.com/harryuan65/To-do-Lists)
 
 ## Environments
 
