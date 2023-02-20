@@ -1,0 +1,21 @@
+version: "3"
+services:
+  web:
+    build: .
+    environment:
+      RAILS_ENV: development
+      PG_DATABASE: to_do_list_rails
+      PG_HOST: localhost
+      PG_USERNAME: postgres
+      PG_PASSWORD: ""
+    links:
+      - postgres
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:14.4-alpine
+    ports:
+      - 5433:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
