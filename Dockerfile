@@ -1,5 +1,14 @@
-FROM ruby:3.0.3
+FROM ruby:3.0.3-alpine
 WORKDIR /app
+
+ARG RUBY_PACKAGES="build-base postgresql-dev tzdata"
+# Fix nokogiri .so version error
+ARG NOKOGIRI_PACKAGES="gcompat"
+RUN apk update \
+  && apk upgrade \
+  && apk add --update --no-cache $RUBY_PACKAGES $NOKOGIRI_PACKAGES\
+  && gem install bundler
+
 COPY Gemfile Gemfile.lock ./
 RUN bundle install
 COPY . .
