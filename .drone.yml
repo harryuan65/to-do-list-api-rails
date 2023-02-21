@@ -1,0 +1,12 @@
+---
+kind: pipeline
+name: Lint
+type: docker
+steps:
+  - name: Lint
+    image: harryuan65/rubocop-docker:1.42.0-amd64
+    environment:
+      BUNDLE_GEMFILE: /linter/Gemfile.linter
+    commands:
+      - bundle exec rubocop -v
+      - bundle exec rubocop
