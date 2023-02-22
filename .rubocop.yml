@@ -19,6 +19,8 @@ inherit_gem:
 AllCops:
   DisabledByDefault: false
   TargetRubyVersion: 3.0.3
+  Exclude:
+    - vendor/**/*.rb # or vendor/bundle/**/*
 
 Style/RedundantReturn:
   Exclude:
