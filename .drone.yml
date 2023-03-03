@@ -51,15 +51,9 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-    volumes:
-      - name: pg
-        path: /var/lib/postgresql/data
   - name: redis
     image: redis:7.0.4-alpine
 volumes:
   - name: gems
     host:
       path: /tmp/gems
-  - name: pg
-    host:
-      path: /tmp/data/postgres
